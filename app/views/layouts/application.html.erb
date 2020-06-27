@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav>
+      <%= link_to 'Home', root_path %>
+      <%= link_to 'New Post', new_post_path %>
+      <% if user_signed_in? %>
+        <%= link_to "#{current_user.email}".html_safe, edit_user_registration_path %>
+        <%= link_to('Sign out', destroy_user_session_path, method: :delete) %>
+      <% else %>
+        <a href="<%= new_user_session_path %>"><span style="color: #000;"> Sign In</a>
+      <% end %>
+    </nav>
+    <div>
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+    </div>
+    <%= yield %>
+  </body>
+</html>
